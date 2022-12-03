@@ -3,30 +3,35 @@ import { Container } from '../ui/Container';
 import { SectionWrapper } from '../ui/SectionWrapper';
 import { ContactForm } from './ContactForm';
 import { ContactList } from './ContactList';
+import PropTypes from 'prop-types';
 // import { nanoid } from 'nanoid';
 // import contacts from './data/contacts.json';
 
 export class App extends Component {
+  static propTypes = {
+    initialContacts: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.node.isRequired,
+        name: PropTypes.string.isRequired,
+        phone: PropTypes.string.isRequired,
+      }).isRequired
+    ).isRequired,
+  };
+
   static defaultProps = {
     initialContacts: [],
   };
 
   state = {
     contacts: this.props.initialContacts,
-    name: '',
-    phone: '',
+    // name: '',
+    // phone: '',
   };
 
   handleAddContact = newContact =>
     this.setState(({ contacts }) => ({
       contacts: [...contacts, newContact],
     }));
-
-  // addSticker = (img, label) => {
-  //   this.setState(prevState => ({
-  //     stickers: [...prevState.stickers, { id: nanoid(), img, label }],
-  //   }));
-  // };
 
   getVisibleContacts = () => {
     const { contacts } = this.state;

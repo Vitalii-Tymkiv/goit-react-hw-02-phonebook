@@ -1,4 +1,4 @@
-import { ContactItem, Name } from './Contact.styled';
+import { ContactItem, Name, Btn } from './Contact.styled';
 import PropTypes from 'prop-types';
 
 export const Contact = ({ name, phone }) => {
@@ -7,6 +7,7 @@ export const Contact = ({ name, phone }) => {
       <Name>
         {name}: {phone}
       </Name>
+      <Btn type="button">Delete</Btn>
     </ContactItem>
   );
 };

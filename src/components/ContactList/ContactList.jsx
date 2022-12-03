@@ -2,7 +2,6 @@ import { Contact } from '../Contact/Contact';
 import { List } from './ContactList.styled';
 import PropTypes from 'prop-types';
 export const ContactList = ({ contacts }) => {
-  console.log(contacts);
   return (
     <List>
       {contacts.map(({ name, phone, id }) => (
