@@ -9,7 +9,8 @@ export const Contact = ({ name, phone, onDelete }) => {
         {name}: {phone}
       </Name>
       <Btn type="button" onClick={onDelete}>
-        Delete <RiDeleteBin6Fill></RiDeleteBin6Fill>
+        Delete
+        <RiDeleteBin6Fill style={{ marginLeft: '5px' }} />
       </Btn>
     </ContactItem>
   );

@@ -36,3 +36,7 @@ ul {
   padding: 0;
   margin: 0;
 }
+
+.react-icons {
+  vertical-align: middle;
+}

@@ -11,6 +11,8 @@ export const Name = styled.span`
 `;
 
 export const Btn = styled.button`
+  display: inline-flex;
+  align-items: center;
   cursor: pointer;
   color: #fff;
   font-weight: 500;

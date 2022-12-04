@@ -21,6 +21,7 @@ export const Btn = styled.button`
   background-color: rgba(115, 102, 255, 0.15);
   transition: all 0.3s ease;
   border: none;
+  text-align: center;
 
   &:hover {
     color: #fff;

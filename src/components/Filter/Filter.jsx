@@ -1,10 +1,14 @@
 import PropTypes from 'prop-types';
 import { Label, LabelName, Input } from './Filter.styled';
+import { GoSearch } from 'react-icons/go';
 
 export const Filter = ({ value, onChange }) => {
   return (
     <Label>
-      <LabelName>Find contacts by name</LabelName>
+      <LabelName>
+        <GoSearch style={{ verticalAlign: 'middle', marginRight: '5px' }} />
+        Find contacts by name
+      </LabelName>
       <Input
         type="text"
         name="name"
