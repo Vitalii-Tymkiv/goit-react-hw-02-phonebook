@@ -3,9 +3,8 @@ import { Container } from '../ui/Container';
 import { SectionWrapper } from '../ui/SectionWrapper';
 import { ContactForm } from './ContactForm';
 import { ContactList } from './ContactList';
+import { Filter } from './Filter';
 import PropTypes from 'prop-types';
-// import { nanoid } from 'nanoid';
-// import contacts from './data/contacts.json';
 
 export class App extends Component {
   static propTypes = {
@@ -24,8 +23,7 @@ export class App extends Component {
 
   state = {
     contacts: this.props.initialContacts,
-    // name: '',
-    // phone: '',
+    filter: '',
   };
 
   handleAddContact = newContact =>
@@ -33,20 +31,49 @@ export class App extends Component {
       contacts: [...contacts, newContact],
     }));
 
-  getVisibleContacts = () => {
+  handleCheckContact = name => {
     const { contacts } = this.state;
-    return contacts.filter(contact => contact.name.toLowerCase());
+    const isExistContact = contacts.find(contact => contact.name === name);
+    isExistContact && alert(`${name} Is already in contacts`);
+    return isExistContact;
+  };
+
+  handleDeleteContact = contactId =>
+    this.setState(({ contacts }) => ({
+      contacts: contacts.filter(contact => contact.id !== contactId),
+    }));
+
+  handleChangeFilter = e => {
+    this.setState({ filter: e.currentTarget.value });
+  };
+
+  getVisibleContacts = () => {
+    const { contacts, filter } = this.state;
+    const normalizedFilter = filter.toLowerCase();
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(normalizedFilter)
+    );
   };
 
   render() {
+    const { contacts, filter } = this.state;
+
+    const visibleContacts = this.getVisibleContacts();
     return (
       <Container>
         <SectionWrapper title="Phonebook">
-          <ContactForm onAdd={this.handleAddContact} />
+          <ContactForm
+            onAdd={this.handleAddContact}
+            onCheckContact={this.handleCheckContact}
+          />
         </SectionWrapper>
         <SectionWrapper title="Contact List">
-          {this.state.contacts.length > 0 && (
-            <ContactList contacts={this.state.contacts} />
+          <Filter value={filter} onChange={this.handleChangeFilter} />
+          {contacts.length > 0 && (
+            <ContactList
+              contacts={visibleContacts}
+              onDelete={this.handleDeleteContact}
+            />
           )}
         </SectionWrapper>
       </Container>

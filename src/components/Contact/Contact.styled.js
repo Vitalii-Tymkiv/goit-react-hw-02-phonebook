@@ -12,7 +12,7 @@ export const Name = styled.span`
 
 export const Btn = styled.button`
   cursor: pointer;
-  color: #7366ff;
+  color: #fff;
   font-weight: 500;
   padding: 10px 15px;
   border-radius: 5px;

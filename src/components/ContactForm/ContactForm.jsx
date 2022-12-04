@@ -9,7 +9,8 @@ const INITIAL_STATE = {
 };
 export class ContactForm extends Component {
   static propTypes = {
-    onSubmit: PropTypes.func,
+    onAdd: PropTypes.func.isRequired,
+    onCheckContact: PropTypes.func.isRequired,
   };
 
   state = INITIAL_STATE;
@@ -24,7 +25,11 @@ export class ContactForm extends Component {
     e.preventDefault();
     const { name, phone } = this.state;
     const { onAdd } = this.props;
-    onAdd({ id: nanoid(), name, phone });
+    const { onCheckContact } = this.props;
+    onCheckContact(name)
+      ? this.resetForm()
+      : onAdd({ id: nanoid(), name, phone });
+
     this.resetForm();
   };
 
