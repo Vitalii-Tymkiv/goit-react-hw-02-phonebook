@@ -26,9 +26,8 @@ export class ContactForm extends Component {
     const { name, phone } = this.state;
     const { onAdd } = this.props;
     const { onCheckContact } = this.props;
-    onCheckContact(name)
-      ? this.resetForm()
-      : onAdd({ id: nanoid(), name, phone });
+    if (onCheckContact(name)) return;
+    onAdd({ id: nanoid(), name, phone });
 
     this.resetForm();
   };

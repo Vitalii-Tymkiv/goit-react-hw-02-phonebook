@@ -4,25 +4,30 @@ import { SectionWrapper } from '../ui/SectionWrapper';
 import { ContactForm } from './ContactForm';
 import { ContactList } from './ContactList';
 import { Filter } from './Filter';
-import PropTypes from 'prop-types';
+import { showAlertMessage } from 'ui/AlertMessage/AlertMessage';
 
 export class App extends Component {
-  static propTypes = {
-    initialContacts: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.node.isRequired,
-        name: PropTypes.string.isRequired,
-        phone: PropTypes.string.isRequired,
-      }).isRequired
-    ).isRequired,
-  };
+  // static propTypes = {
+  //   initialContacts: PropTypes.arrayOf(
+  //     PropTypes.shape({
+  //       id: PropTypes.node.isRequired,
+  //       name: PropTypes.string.isRequired,
+  //       phone: PropTypes.string.isRequired,
+  //     }).isRequired
+  //   ).isRequired,
+  // };
 
-  static defaultProps = {
-    initialContacts: [],
-  };
+  // static defaultProps = {
+  //   initialContacts: [],
+  // };
 
   state = {
-    contacts: this.props.initialContacts,
+    contacts: [
+      { id: 'id-1', name: 'Rosie Simpson', phone: '459-12-56' },
+      { id: 'id-2', name: 'Hermione Kline', phone: '443-89-12' },
+      { id: 'id-3', name: 'Eden Clements', phone: '645-17-79' },
+      { id: 'id-4', name: 'Annie Copeland', phone: '227-91-26' },
+    ],
     filter: '',
   };
 
@@ -34,7 +39,7 @@ export class App extends Component {
   handleCheckContact = name => {
     const { contacts } = this.state;
     const isExistContact = contacts.find(contact => contact.name === name);
-    isExistContact && alert(`${name} Is already in contacts`);
+    isExistContact && showAlertMessage(name);
     return isExistContact;
   };
 
@@ -59,6 +64,7 @@ export class App extends Component {
     const { contacts, filter } = this.state;
 
     const visibleContacts = this.getVisibleContacts();
+
     return (
       <Container>
         <SectionWrapper title="Phonebook">
